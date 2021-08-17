@@ -9,7 +9,7 @@ export function CardManga() {
         alt="My hero academy"
         objectFit="cover"
       />
-      <Box bg="black" borderBottomRadius="md">
+      <Box >
         <Text
           textAlign="center"
           fontWeight="md"

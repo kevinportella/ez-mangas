@@ -7,18 +7,15 @@ import {
   HStack,
   IconButton,
   Link,
-  Stack,
-  Text,
-  useBreakpointValue,
+  Stack, useBreakpointValue,
   useColorMode,
   useColorModeValue,
   useDisclosure
 } from "@chakra-ui/react";
 import NextLink from 'next/link';
 import { useMemo } from 'react';
-
+import { LogoSite } from './LogoEZMangas';
 import { SearchBox } from './SearchBox';
-
 interface IHeaderLink {
   title: string;
   link: string;
@@ -86,7 +83,7 @@ export function Header() {
           <HStack spacing={8} alignItems={'center'}>
             <NextLink href="/" passHref>
               <chakra.a>
-                <Text fontWeight="bold" fontSize="2rem" >Ez Mangás</Text>
+                <LogoSite />
               </chakra.a>
             </NextLink>
 
@@ -109,6 +106,12 @@ export function Header() {
             >
               {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
             </Button>
+
+            <NextLink href="/auth/sign-in" passHref>
+              <Button as="a" colorScheme="blue" size="sm">
+                Entrar
+              </Button>
+            </NextLink>
           </Flex>
       </Flex>
 

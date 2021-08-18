@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <title>EZ Mangás | Mangás de qualidade sem ads abusivos ;)</title>
 
-      {/* <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" /> */}
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" />
 
       <meta
         name="description"
@@ -20,11 +20,11 @@ function MyApp({ Component, pageProps }) {
     </Head>
 
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />        
-      </ChakraProvider>    
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   );
-  
+
 }
 
 export default MyApp

@@ -10,20 +10,20 @@ export function Dashboard() {
         justify="center"
         maxWidth="1420px"
         mx="auto"
-        my="2rem"
+        p="2rem"
       >
         <Heading
           as="h2"
           size="lg"
 
         >
-          Mangás da semana:
+          Atualizados recentemente:
         </Heading>
 
         <Grid
           templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)","repeat(5, 1fr)","repeat(6, 1fr)"]}
           gap={[2,4,6,8]}
-          my={["4","6"]}
+          my={["6","8"]}
         >
           <CardManga />
           <CardManga />

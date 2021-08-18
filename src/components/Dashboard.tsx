@@ -1,6 +1,12 @@
 import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
 import { CardManga } from "./CardManga";
 
+const mangaInf = {
+  title: "My hero academy",
+  image: "https://mangayabu.top/ezoimgfmt/cdn.mangayabu.com/capas/boku-no-hero-academia-manga.jpg?ezimgfmt=ng:webp/ngcb1",
+  alt: "My hero academy"
+}
+
 export function Dashboard() {
   return(
     <Box  >
@@ -25,29 +31,12 @@ export function Dashboard() {
           gap={[2,4,6,8]}
           my={["6","8"]}
         >
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
+          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} />
 
         </Grid>
       </Flex>

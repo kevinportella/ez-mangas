@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
 import { CardManga } from "./CardManga";
 
 export function Dashboard() {
@@ -17,11 +17,11 @@ export function Dashboard() {
           size="lg"
 
         >
-          Mangás da Semana:
+          Mangás da semana:
         </Heading>
 
         <Grid
-          templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)","repeat(5, 1fr)",]}
+          templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)","repeat(5, 1fr)","repeat(6, 1fr)"]}
           gap={[2,4,6,8]}
           my={["4","6"]}
         >

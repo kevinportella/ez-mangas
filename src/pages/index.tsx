@@ -1,12 +1,13 @@
 import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/Header";
-import { StarRating } from "../components/StarRating";
+import { JoinDiscord } from "../components/JoinDiscord";
 
 
 export default function Home() {
   return (
     <>
       <Header />
+      <JoinDiscord />
       <Dashboard />
     </>
   )

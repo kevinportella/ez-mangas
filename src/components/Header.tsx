@@ -1,5 +1,6 @@
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
+  Avatar,
   Box,
   Button,
   chakra,
@@ -7,14 +8,22 @@ import {
   HStack,
   IconButton,
   Link,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Stack, useBreakpointValue,
   useColorMode,
   useColorModeValue,
   useDisclosure
 } from "@chakra-ui/react";
 import NextLink from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { FaUserAlt } from 'react-icons/fa';
+import { supabase } from '../services/supabase';
 import { LogoSite } from './LogoEZMangas';
+import PersonalAvatar from './PersonalAvatar';
 import { SearchBox } from './SearchBox';
 interface IHeaderLink {
   title: string;
@@ -39,6 +48,8 @@ const NavLink = ({ link } : { link :IHeaderLink } ) => (
 );
 
 export function Header() {
+  const [ session, setSession] = useState(null)
+
   const mobileMenuDisclosure = useDisclosure();
 
   const { toggleColorMode, colorMode } = useColorMode();
@@ -64,6 +75,14 @@ export function Header() {
     base: false,
     lg: true
   })
+
+  useEffect(() => {
+    setSession(supabase.auth.session())
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px="4" width="100%">
@@ -107,11 +126,49 @@ export function Header() {
               {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
             </Button>
 
-            <NextLink href="/auth/sign-in" passHref>
-              <Button as="a" colorScheme="blue" size="sm">
-                Entrar
-              </Button>
-            </NextLink>
+            {session && (
+              <Menu strategy="fixed">
+                <MenuButton
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                  width="40px"
+                  height="40px"
+                >
+
+                  <Avatar
+                    width="40px"
+                    height="40px"
+                    // src={`/api/profile-image/${userFire.uid}?reset=${userSiteData.profileUpdatedAt}`}
+                  />
+                </MenuButton>
+
+                <MenuList>
+                  <NextLink href="/profile" passHref>
+                    <MenuItem as="a" icon={<FaUserAlt />}>
+                      Perfil
+                    </MenuItem>
+                  </NextLink>
+                  <MenuItem >Favoritos</MenuItem>
+                  <MenuDivider />
+                  <MenuItem
+                    onClick={() => supabase.auth.signOut()}
+                  >
+                    Sair
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            )}
+
+            {!session && (
+              <NextLink href="/auth/sign-in" passHref>
+                <Button as="a" colorScheme="blue" size="sm">
+                  Entrar
+                </Button>
+              </NextLink>
+            )}
+
           </Flex>
       </Flex>
 

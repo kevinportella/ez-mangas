@@ -1,9 +1,32 @@
 import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import { CardManga } from "../../components/CardManga";
 import { Header } from "../../components/Header";
 
+interface MangaInf {
+  title: string;
+  mal_id: string;
+  image_url: string;
+  alt: string;
+  url: string;
+}
+
 export default function Favoritos() {
+  const [topManga, setTopManga] = useState<MangaInf[]>([]);
+
+  const getTopManga = async () => {
+
+    const temp = await fetch(`https://api.jikan.moe/v3/top/manga/1/favorite`)
+      .then(response => response.json())
+      .then(data => setTopManga(data.top.slice(0, 24)));
+    ;
+  }
+
+  useEffect(() => {
+    getTopManga()
+  }, [])
+
   return (
     <>
       <Header />
@@ -22,7 +45,7 @@ export default function Favoritos() {
           size="lg"
 
         >
-          Seus favoritos:
+          Favoritos:
         </Heading>
 
         <Grid
@@ -30,12 +53,9 @@ export default function Favoritos() {
           gap={[2,4,6,8]}
           my={["4","6"]}
         >
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
-          <CardManga />
+          {topManga.map(mangaInf => {
+            return <CardManga key={mangaInf.mal_id} mangaInf={mangaInf} />
+          })}
 
         </Grid>
       </Flex>

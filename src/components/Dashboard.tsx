@@ -25,8 +25,6 @@ export function Dashboard() {
     getTopManga()
   }, [])
 
-  console.log(topManga)
-
   return(
     <Box  >
       <Flex

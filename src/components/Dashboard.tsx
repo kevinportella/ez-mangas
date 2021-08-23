@@ -1,13 +1,33 @@
 import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { CardManga } from "./CardManga";
-
-const mangaInf = {
-  title: "My hero academy",
-  image: "https://mangayabu.top/ezoimgfmt/cdn.mangayabu.com/capas/boku-no-hero-academia-manga.jpg?ezimgfmt=ng:webp/ngcb1",
-  alt: "My hero academy"
+interface MangaInf {
+  title: string;
+  mal_id: string;
+  image_url: string;
+  alt: string;
+  url: string;
 }
 
+
 export function Dashboard() {
+  const [topManga, setTopManga] = useState<MangaInf[]>([]);
+
+  const getTopManga = async () => {
+
+    const temp = await fetch(`https://api.jikan.moe/v3/top/manga/1/bypopularity`)
+      .then(response => response.json())
+      .then(data => setTopManga(data.top.slice(0, 24)));
+    ;
+  }
+
+  useEffect(() => {
+    getTopManga()
+  }, [])
+
+  console.log(topManga)
+
   return(
     <Box  >
       <Flex
@@ -23,7 +43,7 @@ export function Dashboard() {
           size="lg"
 
         >
-          Atualizados recentemente:
+          Mais populares:
         </Heading>
 
         <Grid
@@ -31,12 +51,16 @@ export function Dashboard() {
           gap={[2,4,6,8]}
           my={["6","8"]}
         >
+
+          {topManga.map(mangaInf => {
+            return <CardManga key={mangaInf.mal_id} mangaInf={mangaInf} />
+          })}
+          {/* <CardManga mangaInf={mangaInf} />
           <CardManga mangaInf={mangaInf} />
           <CardManga mangaInf={mangaInf} />
           <CardManga mangaInf={mangaInf} />
           <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
+          <CardManga mangaInf={mangaInf} /> */}
 
         </Grid>
       </Flex>

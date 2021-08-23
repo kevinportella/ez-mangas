@@ -10,7 +10,6 @@ interface MangaInf {
   url: string;
 }
 
-
 export function Dashboard() {
   const [topManga, setTopManga] = useState<MangaInf[]>([]);
 
@@ -55,12 +54,6 @@ export function Dashboard() {
           {topManga.map(mangaInf => {
             return <CardManga key={mangaInf.mal_id} mangaInf={mangaInf} />
           })}
-          {/* <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} />
-          <CardManga mangaInf={mangaInf} /> */}
 
         </Grid>
       </Flex>

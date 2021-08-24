@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { FaUserAlt } from 'react-icons/fa';
+import { FaUserAlt, FaUserAltSlash } from 'react-icons/fa';
 import { supabase } from '../services/supabase';
 import { LogoSite } from './LogoEZMangas';
 import PersonalAvatar from './PersonalAvatar';
@@ -49,6 +49,7 @@ const NavLink = ({ link } : { link :IHeaderLink } ) => (
 
 export function Header() {
   const [ session, setSession] = useState(null)
+  const [avatarUrl, setAvatarUrl] = useState(null)
 
   const mobileMenuDisclosure = useDisclosure();
 
@@ -75,6 +76,28 @@ export function Header() {
     base: false,
     lg: true
   })
+
+  async function getAvatar() {
+    try {
+      const user = await supabase.auth.user();
+
+      const { data, error } = await supabase
+        .from(`profiles`)
+        .select('avatar_url')
+        .eq(`id`, user)
+
+        if (data) {
+          setAvatarUrl(data)
+        }
+
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  useEffect(() => {
+    getAvatar()
+  },[session])
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -140,8 +163,11 @@ export function Header() {
                   <Avatar
                     width="40px"
                     height="40px"
-                    // src={`/api/profile-image/${userFire.uid}?reset=${userSiteData.profileUpdatedAt}`}
+                    src={avatarUrl}
+                    alt="Avatar"
+                    pos={'relative'}
                   />
+
                 </MenuButton>
 
                 <MenuList>
@@ -150,13 +176,16 @@ export function Header() {
                       Perfil
                     </MenuItem>
                   </NextLink>
-                  <MenuItem >Favoritos</MenuItem>
                   <MenuDivider />
-                  <MenuItem
-                    onClick={() => supabase.auth.signOut()}
-                  >
-                    Sair
-                  </MenuItem>
+                  <NextLink href="/" passHref>
+                    <MenuItem
+                      as="a"
+                      icon={<FaUserAltSlash />}
+                      onClick={() => supabase.auth.signOut()}
+                    >
+                      Sair
+                    </MenuItem>
+                  </NextLink>
                 </MenuList>
               </Menu>
             )}
@@ -173,8 +202,8 @@ export function Header() {
       </Flex>
 
       {mobileMenuDisclosure.isOpen ? (
-        <Box pb={4} display={{ md: 'none' }}>
-          <Stack as={'nav'} spacing={4}>
+        <Box pb="4" display={{ md: 'none' }}>
+          <Stack as="nav" spacing="4">
             {linksMenu.map((link) => (
               <NavLink key={link.title} link={link}/>
             ))}

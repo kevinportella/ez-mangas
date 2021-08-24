@@ -1,4 +1,4 @@
-import { Avatar ,Button } from "@chakra-ui/react"
+import { Avatar ,Button, Flex } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { supabase } from "../services/supabase"
 
@@ -63,13 +63,13 @@ export default function PersonalAvatar({ url, onUpload }) {
 
 
   return (
-    <div>
+    <Flex  direction="column" align="center" justify="center" >
       {avatarUrl ? (
         <Avatar
-          size={'2xl'}
+          size="2xl"
           src={avatarUrl}
           alt="Avatar"
-          mb={4}
+          mb="4"
           pos={'relative'}
           _after={{
             content: '""',
@@ -83,27 +83,29 @@ export default function PersonalAvatar({ url, onUpload }) {
             right: 3
           }}
         />
+
       ) : (
-        <Avatar
-          size={'2xl'}
-          src={avatarUrl}
-          alt="Avatar"
-          mb={4}
-          pos={'relative'}
-          _after={{
-            content: '""',
-            w: 4,
-            h: 4,
-            bg: 'green.300',
-            border: '2px solid white',
-            rounded: 'full',
-            pos: 'absolute',
-            bottom: 0,
-            right: 3
-          }}
-        />
+      <Avatar
+        size="2xl"
+        src={avatarUrl}
+        alt="Avatar"
+        mb="4"
+        pos={'relative'}
+        _after={{
+          content: '""',
+          w: 4,
+          h: 4,
+          bg: 'green.300',
+          border: '2px solid white',
+          rounded: 'full',
+          pos: 'absolute',
+          bottom: 0,
+          right: 3
+        }}
+      />
+
       )}
-      <div>
+      <Flex align="center" justify="center">
         <Button
           size="sm"
           flex={1}
@@ -129,7 +131,7 @@ export default function PersonalAvatar({ url, onUpload }) {
           onChange={uploadAvatar}
           disabled={uploading}
         />
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   )
 }

@@ -27,18 +27,19 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleLogin = async ( email, password ) => {
+    setLoading( true )
+
     try {
-      setLoading( true )
+
       const { error } = await supabase.auth.signIn({ email, password });
-      if ( error ) throw error
+
+      if ( error ) throw error;
+
+      router.push('/')
     } catch ( error ) {
       alert(error.error_description || error.message)
-      return;
-    } finally {
-      setLoading(false)
-      router.push('/')
-
     }
+      setLoading(false)
   }
 
   return (

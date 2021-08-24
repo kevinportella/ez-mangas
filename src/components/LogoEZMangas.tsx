@@ -11,8 +11,8 @@ interface ILogoSiteProps {
 }
 
 export const LogoSite: React.FC<ILogoSiteProps> = (props) => {
-  // const EZMangasLogo = useColorModeValue(EZMangasDark, EZMangasLight);
+  const EZMangasLogo = useColorModeValue(EZMangasLight, EZMangasDark);
 
-  return <Text fontWeight="bold" fontSize="1.5rem" fontFamily="Poppins" >EZ Mangás</Text>;
+  return <EZMangasLogo {...props} />;
 };
-{/* <EZMangasLogo {...props} /> */}
+

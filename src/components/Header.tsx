@@ -81,14 +81,25 @@ export function Header() {
     try {
       const user = await supabase.auth.user();
 
+      if (!user) {
+        return;
+      }
+
       const { data, error } = await supabase
         .from(`profiles`)
         .select('avatar_url')
-        .eq(`id`, user)
+        .eq(`id`, user.id)
+        .single()
 
         if (data) {
-          setAvatarUrl(data)
+
+          const generateAvatar = await downloadImage(data.avatar_url)
+          setAvatarUrl(generateAvatar)
         }
+        if (error) {
+          throw error
+        }
+        console.log(data)
 
     } catch (error) {
       alert(error.message)
@@ -98,6 +109,26 @@ export function Header() {
   useEffect(() => {
     getAvatar()
   },[session])
+
+  async function downloadImage(path) {
+    try {
+      const { data, error } = await supabase.storage
+        .from(`avatars`)
+        .download(path)
+
+      if (error) {
+        throw error;
+      }
+
+      const url = URL.createObjectURL(data)
+      return url;
+
+    } catch (error) {
+      console.log('Error downloading image:', error.message)
+    }
+  }
+
+
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -122,10 +153,10 @@ export function Header() {
             }
           />
 
-          <HStack spacing={8} alignItems={'center'}>
+          <HStack spacing="8" alignItems={'center'}>
             <NextLink href="/" passHref>
               <chakra.a>
-                <LogoSite />
+                <LogoSite width="150" />
               </chakra.a>
             </NextLink>
 

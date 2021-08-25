@@ -1,8 +1,8 @@
 import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import { CardManga } from "../../components/CardManga";
-import { Header } from "../../components/Header";
+import { CardManga } from "~/components/CardManga";
+import { Header } from "~/components/Header";
 
 interface MangaInf {
   title: string;

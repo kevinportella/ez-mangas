@@ -1,6 +1,6 @@
 import { Avatar ,Button, Flex } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
-import { supabase } from "../services/supabase"
+import { supabase } from "~/services/supabase"
 
 export default function PersonalAvatar({ url, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null)

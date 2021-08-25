@@ -8,10 +8,10 @@ import {
   Text,
   useColorModeValue} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import PersonalAvatar from '../components/PersonalAvatar';
-import { supabase } from '../services/supabase';
+import { Footer } from '~/components/Footer';
+import { Header } from '~/components/Header';
+import PersonalAvatar from '~/components/PersonalAvatar';
+import { supabase } from '~/services/supabase';
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true)
@@ -138,7 +138,7 @@ export default function Account({ session }) {
             <Button
               p="2"
               isLoading={loading}
-              loadingText="Updating ..."
+              loadingText="Updating ~."
               onClick={() => updateProfile({ username, avatar_url })}
               flex={1}
               fontSize="sm"

@@ -2,10 +2,9 @@ import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack, Text,
 import { useRouter } from "next/dist/client/router";
 import NextLink from 'next/link';
 import { useState } from 'react';
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { supabase } from "../../services/supabase";
-
+import { Footer } from "~/components/Footer";
+import { Header } from "~/components/Header";
+import { supabase } from "~/services/supabase";
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);

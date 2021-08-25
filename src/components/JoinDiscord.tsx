@@ -1,7 +1,7 @@
 import { Box, chakra, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { FaDiscord } from 'react-icons/fa';
-import { configLinks } from "../configs/links";
+import { configLinks } from "~/configs/links";
 
 export const JoinDiscord: React.FC = () => {
   return (

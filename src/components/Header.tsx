@@ -21,9 +21,8 @@ import {
 import NextLink from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { FaUserAlt, FaUserAltSlash } from 'react-icons/fa';
-import { supabase } from '../services/supabase';
+import { supabase } from '~/services/supabase';
 import { LogoSite } from './LogoEZMangas';
-import PersonalAvatar from './PersonalAvatar';
 import { SearchBox } from './SearchBox';
 interface IHeaderLink {
   title: string;
